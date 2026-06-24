@@ -1,2 +1,11 @@
+[project]
+name = "zex-chatbot"
+version = "0.1.0"
+dependencies = [
+    "fastapi",
+    "requests",
+    "pydantic"
+]
+
 [tool.vercel]
 entrypoint = "api.index:app"
