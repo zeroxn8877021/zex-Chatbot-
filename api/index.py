@@ -11,9 +11,15 @@ class ChatRequest(BaseModel):
     messages: list
     mode: str = "Chat"
 
+@app.get("/")
+def read_root():
+    return {"message": "API is running"}
+
 @app.post("/api/chat")
 def chat(req: ChatRequest):
-    api_key = os.environ["GROQ_API_KEY"]
+    api_key = os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        return {"error": "GROQ_API_KEY not found in environment"}
 
     response = requests.post(
         "https://api.groq.com/openai/v1/chat/completions",
